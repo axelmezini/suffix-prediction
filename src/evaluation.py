@@ -142,7 +142,7 @@ def logic_loss_multiple_samples(rnn, deepdfa, data, prefixes, temperature=1.0, n
 def suffix_prediction_with_temperature_with_stop(model, dataset, prefix_len, stop_event, temperature=1.0):
     dataset = dataset.to(device)
     prefix = dataset[:, :prefix_len, :]
-    predicted_traces = prefix
+    predicted_traces = prefix.clone()
 
     logits, rnn_state = model(prefix)
     stop_event_idx = stop_event.index(1)
@@ -164,9 +164,9 @@ def suffix_prediction_with_temperature_with_stop(model, dataset, prefix_len, sto
 
 
 def greedy_suffix_prediction_with_stop(model, dataset, prefix_len, stop_event):
-    dataset = dataset.to(device) 
+    dataset = dataset.to(device)
     prefix = dataset[:, :prefix_len, :]
-    predicted_traces = prefix
+    predicted_traces = prefix.clone()
 
     logits, rnn_state = model(prefix)
     stop_event_idx = stop_event.index(1)

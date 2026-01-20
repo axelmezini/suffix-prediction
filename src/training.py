@@ -11,7 +11,7 @@ else:
     device = 'cpu'
 
 
-def train(rnn, train_dataset, test_dataset, max_num_epochs, deepdfa=None, prefixes=[], batch_size=64):
+def train(rnn, train_dataset, test_dataset, max_num_epochs, alpha, deepdfa=None, prefixes=[], batch_size=64):
     curr_temp = 0.5
     lambda_temp = 0.999
     min_temp = 0.0001
@@ -54,7 +54,7 @@ def train(rnn, train_dataset, test_dataset, max_num_epochs, deepdfa=None, prefix
                 log_loss, deviation = logic_loss_multiple_samples(rnn, deepdfa, X, prefixes, curr_temp, num_samples=10)
                 log_loss_batches.append(log_loss.item())
                 deviations_batches.append(deviation)
-                loss = 0.75 * sup_loss + 0.25 * log_loss
+                loss = alpha * sup_loss + (1-alpha) * log_loss
             else:
                 loss = sup_loss
 

@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import json
 
 if torch.cuda.is_available():
     device = "cuda:0"
@@ -24,7 +25,7 @@ class DeepDFA(nn.Module):
 
     # input: sequence of actions (batch, length_seq)
     def forward(self, action_seq, current_state=None):
-        print('curr state:', current_state)
+        #print('curr state:', current_state)
         torch.set_printoptions(threshold=torch.inf)
         batch_size = action_seq.size()[0]
         length_seq = action_seq.size()[1]
@@ -72,7 +73,6 @@ class DeepDFA(nn.Module):
             # initial state is 0 for construction
             s[:, 0] = 1.0
         else:
-            print('current state in forward_pi is None')
             s = current_state
         for i in range(length_size):
             a = action_seq[:, i, :]

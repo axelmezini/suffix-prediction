@@ -139,6 +139,7 @@ class DFA:
         # print(self.__dict__)
         # Complete the transition function with the symbols of the environment that ARE NOT in the formula
         self.num_of_symbols = len(dictionary_symbols)
+        print(self.alphabet)
         self.alphabet = []
         for a in range(self.num_of_symbols):
             self.alphabet.append(a)

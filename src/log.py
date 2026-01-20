@@ -43,6 +43,7 @@ class Log:
                 event_name = f"a_{(event['concept:name']).lower().replace(' ', '_').replace('-', '_').replace('.', '_').replace('(',  '_').replace(')', '_')}"
                 if event_name not in event_names:
                     event_names.append(event_name)
+        self.event_names = event_names
         return event_names
 
     def encode(self):
